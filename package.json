@@ -4,7 +4,9 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
-    "format": "prettier --write ."
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "chat": "tsx src/05_chat_prompt.ts"
   },
   "keywords": [],
   "author": "",
@@ -26,11 +28,15 @@
     "typescript-eslint": "^8.23.0"
   },
   "dependencies": {
+    "@joplin/turndown-plugin-gfm": "^1.0.61",
     "@langchain/textsplitters": "^0.1.0",
     "cheerio": "^1.0.0",
+    "colorette": "^2.0.20",
+    "command-line-args": "^6.0.1",
     "dotenv": "^16.4.7",
     "drizzle-orm": "^0.39.1",
     "gpt-tokenizer": "^2.8.1",
+    "inquirer": "^12.4.1",
     "openai": "^4.82.0",
     "pg": "^8.13.1",
     "turndown": "^7.2.0"

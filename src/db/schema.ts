@@ -4,12 +4,12 @@ import {
   text,
   timestamp,
   json,
-  uniqueIndex,
   integer,
   vector,
 } from 'drizzle-orm/pg-core'
 import { sql } from 'drizzle-orm'
 
+// Table schema for storing the urls and the crawled HTML.
 export const crawl = pgTable('crawl', {
   id: serial('id').primaryKey(),
   source: text('source'),
@@ -34,6 +34,7 @@ export const crawl = pgTable('crawl', {
   og_date: timestamp('og_date', { withTimezone: true }),
 })
 
+// Table schema for storing the chunks of text and the embeddings.
 export const chunk = pgTable('chunks', {
   id: serial('id').primaryKey(),
   content: text('content'),

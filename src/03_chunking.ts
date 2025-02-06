@@ -42,12 +42,20 @@ async function processMarkdown() {
         const chunkContent = chunks[i]
         let title = entry.title || null
 
-        // Check for subtitle in the chunk
-        const subtitleMatch = chunkContent.match(
-          /^#+\s+\[([^\]]+)\]\([^\)]+\)|^#+\s+(.*)$/m,
+        // Check for subtitle in the chunk - only at the beginning of the text
+        // Consider headings or strong text as subtitles at the very beginning of the text
+        const firstLine = chunkContent.split('\n')[0]
+        const subtitleMatch = firstLine.match(
+          /^#+\s+(?:\[([^\]]+)\](?:\([^)]+\))?|(.+))|^\*\*(?:\[([^\]]+)\](?:\([^)]+\))?|(.+))\*\*/,
         )
+
         if (subtitleMatch) {
-          title = subtitleMatch[1] || subtitleMatch[2]
+          // Use the first non-undefined group as the title
+          title =
+            subtitleMatch[1] ||
+            subtitleMatch[2] ||
+            subtitleMatch[3] ||
+            subtitleMatch[4]
         }
 
         const tokenCount = countTokens(chunkContent) ?? 0

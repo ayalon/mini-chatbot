@@ -1,3 +1,10 @@
+/**
+ * TASK 1: Crawl the website https://www.gemeindedavos.ch/wohnen
+ *
+ * See 01_crawl.png. Iterate the sidebar and collect all links with a topic.
+ *
+ */
+
 import * as cheerio from 'cheerio'
 import { eq } from 'drizzle-orm'
 import { crawl } from './db/schema'

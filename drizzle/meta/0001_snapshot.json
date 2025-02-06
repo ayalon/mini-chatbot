@@ -177,9 +177,7 @@
         "crawl_url_unique": {
           "name": "crawl_url_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "url"
-          ]
+          "columns": ["url"]
         }
       },
       "policies": {},
