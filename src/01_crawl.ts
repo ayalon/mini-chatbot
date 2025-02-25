@@ -16,9 +16,9 @@ import { db } from './db'
 
 const initialUrl = 'https://www.gemeindedavos.ch/wohnen'
 
-async function collectUrls(url: string, collectedUrls: string[]) {
+async function collectUrls(initialUrl: string, collectedUrls: string[]) {
   try {
-    const response = await fetch(url)
+    const response = await fetch(initialUrl)
     const body = await response.text()
     const $ = cheerio.load(body)
 
@@ -34,7 +34,7 @@ async function collectUrls(url: string, collectedUrls: string[]) {
           const subPageBody = await subPageResponse.text()
           const subpage$ = cheerio.load(subPageBody)
 
-          // Extract links with class icms-link-thema2 from the sidebar pages
+          // Extract links with class .icms-link-thema2 from the sidebar pages
           subpage$('a.icms-link-thema2').each((_, subpageElement) => {
             const detailPageLink = $(subpageElement).attr('href')
             if (detailPageLink) {
@@ -48,7 +48,7 @@ async function collectUrls(url: string, collectedUrls: string[]) {
       }
     }
   } catch (error) {
-    console.error(`Error crawling ${url}:`, error)
+    console.error(`Error crawling ${initialUrl}:`, error)
   }
 }
 
