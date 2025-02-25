@@ -18,7 +18,17 @@ the challenges and pitfalls we faced in the last two year when building large AI
 based chatbots and searches like Alva, the AI search for Kanton Basel Stadt:
 https://www.bs.ch/alva
 
+## Presentation
+https://docs.google.com/presentation/d/1lc6Au1aaTBPv-r2Qro6KSyIqCtJVSKfQT1Trk7wQ5Sk/edit#slide=id.g2b37b16f1cf_0_3
+
 ## Setup the project
+
+### Clone the repository
+
+```bash
+git clone git@github.com:ayalon/mini-chatbot.git
+cd mini-chatbot
+```
 
 ### Install dependencies
 
