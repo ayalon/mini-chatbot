@@ -1,7 +1,11 @@
 /**
  * TASK 1: Crawl the website https://www.gemeindedavos.ch/wohnen
  *
- * See 01_crawl.png. Iterate the sidebar and collect all links with a topic.
+ * See 01_crawl.png.
+ *
+ * 1. Iterate the sidebar (red)
+ * 2. Collect all links with a topic. (green)
+ * 3. Save the links to the database.
  *
  */
 

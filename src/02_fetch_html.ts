@@ -1,6 +1,15 @@
-// Iterate all links in the database and save the HTML from the detail pages to the database
-// Focus on the class .maincontent but also extract the title .contentTitle
-// Save the html to source and use turndown to convert the html to markdown. Save the markdown to markdown
+/**
+ * TASK 2: Fetch the HTML from the detail pages and save it to the database
+ *
+ * See database schema: https://dbdiagram.io/d/67bd8a84263d6cf9a05df492
+ *
+ * 1. Iterate all links in the database
+ * 2. Save the HTML from the detail pages to the database
+ * 3. Focus on the class .maincontent but also extract the title .contentTitle
+ * 4. Save the HTML to "crawl.source" and use turndown to convert the html to markdown. Save the markdown
+ *    to "crawl.markdown"
+ *
+ */
 
 import * as cheerio from 'cheerio'
 import { eq, isNotNull } from 'drizzle-orm'

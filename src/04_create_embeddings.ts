@@ -1,3 +1,12 @@
+/**
+ * TASK 4: Generate Embeddings for the chunks
+ *
+ *   1. Iterate over the chunks in the database
+ *   2. Generate embeddings for the content of the chunks using OpenAI API ('text-embedding-3-small')
+ *   3. Save the embeddings to the database
+ *
+ */
+
 import { eq, and, isNotNull, isNull } from 'drizzle-orm'
 import { OpenAI } from 'openai'
 import { db } from './db'

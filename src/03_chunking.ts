@@ -1,3 +1,14 @@
+/**
+ * TASK 3: Chunk the markdown content into smaller pieces
+ *
+ *   1. Iterate over the markdown content in the database
+ *   2. Split the content into smaller chunks using the RecursiveCharacterTextSplitter
+ *   3. Try to identify subtitles in the chunks
+ *   4. Use the GPT-4 tokenizer to count the tokens in each chunk
+ *   5. Save the chunks to the database
+ *
+ */
+
 import { isNotNull, eq } from 'drizzle-orm'
 import { RecursiveCharacterTextSplitter } from '@langchain/textsplitters'
 import { db } from './db'
@@ -40,26 +51,32 @@ async function processMarkdown() {
       const chunks = await textSplitter.splitText(entry.markdown)
       for (let i = 0; i < chunks.length; i++) {
         const chunkContent = chunks[i]
+
+        // Use the page title as the default chunk title
         let title = entry.title || null
 
-        // Check for subtitle in the chunk - only at the beginning of the text
-        // Consider headings or strong text as subtitles at the very beginning of the text
+        // Check for subtitle at the beginning of the chunk
         const firstLine = chunkContent.split('\n')[0]
-        const subtitleMatch = firstLine.match(
-          /^#+\s+(?:\[([^\]]+)\](?:\([^)]+\))?|(.+))|^\*\*(?:\[([^\]]+)\](?:\([^)]+\))?|(.+))\*\*/,
-        )
 
-        if (subtitleMatch) {
-          // Use the first non-undefined group as the title
-          title =
-            subtitleMatch[1] ||
-            subtitleMatch[2] ||
-            subtitleMatch[3] ||
-            subtitleMatch[4]
+        // Pattern 1: Markdown headings like "# Title" or "# [Title](link)"
+        const headingPattern = /^#+\s+(?:\[([^\]]+)\]|\s*(.+))/
+        // Pattern 2: Bold text like "**Title**" or "**[Title](link)**"
+        const boldPattern = /^\*\*(?:\[([^\]]+)\]|\s*(.+))\*\*/
+
+        const headingMatch = firstLine.match(headingPattern)
+        const boldMatch = firstLine.match(boldPattern)
+
+        // Use the first matching pattern
+        if (headingMatch) {
+          title = headingMatch[1] || headingMatch[2]
+        } else if (boldMatch) {
+          title = boldMatch[1] || boldMatch[2]
         }
 
+        // Use the GPT-4 tokenizer to count the tokens in each chunk
         const tokenCount = countTokens(chunkContent) ?? 0
 
+        // Insert the chunk into the database
         await db
           .insert(chunk)
           .values({

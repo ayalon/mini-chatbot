@@ -1,16 +1,20 @@
 /**
  * TASK 5: Create a Chatbot Prompt
  *
- * - Convert the question into vectors
- * - Find similar chunks in your database
- * - Get the chunks and add them as context to the chatbot
- * - Create a chatbot client with a prompt that includes the question and the chunks
- * - Use the client to generate an answer solely on the context of the question and the chunks
+ *  1. Convert the question into vectors
+ *  2. Find similar chunks in your database using the cosine similarity
+ *  3. Get the chunks and add them as context to the chatbot
+ *  4. Create a chatbot client with a prompt that includes the question and the chunks
+ *  5. Use the client to generate an answer solely on the context of the question and the chunks
  *
  * ACHIEVEMENT:
+ *  Use the search under: https://www.gemeindedavos.ch/suchen
  * - Figure out when the first cheese dairy was founded in Davos
  * - Finde heraus, wann die erste Käserei in Davos gegründet wurde
  *
+ * If you fail, try the chatbot and as the question.
+ *  - When was the first cheese dairy founded in Davos?
+ *  - Wann wurde die erste Käserei in Davos gegründet?
  */
 
 import inquirer from 'inquirer'
@@ -46,6 +50,7 @@ const main = async () => {
     // Search the chunks with the most similar embeddings
     const question_vector = JSON.stringify(result.data[0].embedding)
 
+    // Use the cosine distance to find the most similar chunks
     const similarity = sql<number>`1 - (${cosineDistance(chunk.embedding, question_vector)})`
     const similarContent = await db
       .select({
@@ -80,7 +85,7 @@ const main = async () => {
           content: `
 You are a helpful assistant and are happy to provide information.
 You are primarily programmed to communicate in German. You are only allowed to answer in the language the user used in his question, 
-for example you have to answer in English if the question was asked in English even though the provided context is always in German.
+for example you have to answer in English if the question was asked in English even though the provided contexImplementt is always in German.
 With the following content (delimited by triple quotes """), answer the question at the end with only the information that comes from this content.
 If you are not sure and the answer is not in the content provided, answer with: ‘I don't know how I can help you.’
 Don't make up answers! Don't hallucinate!
