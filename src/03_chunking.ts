@@ -47,31 +47,15 @@ async function processMarkdown() {
     if (entry.markdown) {
       console.log(`Processing entry with ID ${entry.id}`)
 
-      // Create chunks from markdown
-      const chunks = await textSplitter.splitText(entry.markdown)
+      // TODO
+      const chunks = ''
       for (let i = 0; i < chunks.length; i++) {
         const chunkContent = chunks[i]
 
         // Use the page title as the default chunk title
         let title = entry.title || null
 
-        // Check for subtitle at the beginning of the chunk
-        const firstLine = chunkContent.split('\n')[0]
-
-        // Pattern 1: Markdown headings like "# Title" or "# [Title](link)"
-        const headingPattern = /^#+\s+(?:\[([^\]]+)\]|\s*(.+))/
-        // Pattern 2: Bold text like "**Title**" or "**[Title](link)**"
-        const boldPattern = /^\*\*(?:\[([^\]]+)\]|\s*(.+))\*\*/
-
-        const headingMatch = firstLine.match(headingPattern)
-        const boldMatch = firstLine.match(boldPattern)
-
-        // Use the first matching pattern
-        if (headingMatch) {
-          title = headingMatch[1] || headingMatch[2]
-        } else if (boldMatch) {
-          title = boldMatch[1] || boldMatch[2]
-        }
+        // TODO: Try to identify subtitles in the chunks
 
         // Use the GPT-4 tokenizer to count the tokens in each chunk
         const tokenCount = countTokens(chunkContent) ?? 0

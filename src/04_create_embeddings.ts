@@ -24,10 +24,9 @@ async function generateEmbeddings() {
     .execute()
 
   for (const chunkEntry of chunks) {
-    const embedding = await openAIclient.embeddings.create({
-      model: 'text-embedding-3-small',
-      input: chunkEntry.content ?? '',
-    })
+    // TODO: Generate embeddings for the content of the chunks using OpenAI API / 'text-embedding-3-small'
+    const embedding = null
+
     await db
       .update(chunk)
       .set({ embedding: embedding.data[0].embedding })

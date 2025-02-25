@@ -34,14 +34,8 @@ async function collectUrls(initialUrl: string, collectedUrls: string[]) {
           const subPageBody = await subPageResponse.text()
           const subpage$ = cheerio.load(subPageBody)
 
-          // Extract links with class .icms-link-thema2 from the sidebar pages
-          subpage$('a.icms-link-thema2').each((_, subpageElement) => {
-            const detailPageLink = $(subpageElement).attr('href')
-            if (detailPageLink) {
-              collectedUrls.push(new URL(detailPageLink, initialUrl).href)
-              console.log('Found link:', detailPageLink)
-            }
-          })
+          // TODO: Extract links with class .icms-link-thema2 from the pages
+          // and them to the collectedUrls array
         } catch (error) {
           console.error(`Error fetching ${link}:`, error)
         }

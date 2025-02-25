@@ -41,29 +41,15 @@ const main = async () => {
     const question = answers.question
     console.log(green(`Searching for: ${question}`))
 
-    // Get embedding for the question
-    const result = await openAIclient.embeddings.create({
-      model: 'text-embedding-3-small',
-      input: question,
-    })
+    // TODO: Get embedding / vector for the question
+    const result = null
 
     // Search the chunks with the most similar embeddings
     const question_vector = JSON.stringify(result.data[0].embedding)
 
-    // Use the cosine distance to find the most similar chunks
-    const similarity = sql<number>`1 - (${cosineDistance(chunk.embedding, question_vector)})`
-    const similarContent = await db
-      .select({
-        name: chunk.title,
-        content: chunk.content,
-        similarity,
-        url: crawl.url,
-      })
-      .from(chunk)
-      .innerJoin(crawl, eq(chunk.crawl_id, crawl.id))
-      .where(gt(similarity, 0.5))
-      .orderBy((t) => desc(t.similarity))
-      .limit(4)
+    // TODO: Find similar chunks in your database using the cosine similarity
+    // Use the drizzle documentation: https://orm.drizzle.team/docs/guides/vector-similarity-search
+    const similarContent = []
 
     console.log(yellow(`Found' ${similarContent.length} matching chunks`))
 
@@ -84,8 +70,7 @@ const main = async () => {
           role: 'system',
           content: `
 You are a helpful assistant and are happy to provide information.
-You are primarily programmed to communicate in German. You are only allowed to answer in the language the user used in his question, 
-for example you have to answer in English if the question was asked in English even though the provided context is always in German.
+<TODO: Add your instructions>
 With the following content (delimited by triple quotes """), answer the question at the end with only the information that comes from this content.
 If you are not sure and the answer is not in the content provided, answer with: ‘I don't know how I can help you.’
 Don't make up answers! Don't hallucinate!

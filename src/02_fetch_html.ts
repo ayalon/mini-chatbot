@@ -38,10 +38,11 @@ async function fetchAndUpdateUrls() {
           const body = await response.text()
           const $ = cheerio.load(body)
 
-          const mainContent = $('.maincontent').html()?.trim()
-          const title = $('.contentTitle').text()
-          const metaKeywords = $('meta[name="keywords"]').attr('content')
-          const htmlLang = $('html').attr('lang')
+          // TODO
+          const mainContent = ''
+          const title = ''
+          const metaKeywords = ''
+          const htmlLang = ''
 
           let markdownContent = ''
           if (mainContent) {
@@ -51,11 +52,7 @@ async function fetchAndUpdateUrls() {
           await db
             .update(crawl)
             .set({
-              source: mainContent,
-              markdown: markdownContent,
-              title: title,
-              summary: metaKeywords,
-              language: htmlLang,
+              // TODO: Set the correct values for the columns
             })
             .where(eq(crawl.id, entry.id))
             .execute()
