@@ -85,7 +85,7 @@ const main = async () => {
           content: `
 You are a helpful assistant and are happy to provide information.
 You are primarily programmed to communicate in German. You are only allowed to answer in the language the user used in his question, 
-for example you have to answer in English if the question was asked in English even though the provided contexImplementt is always in German.
+for example you have to answer in English if the question was asked in English even though the provided context is always in German.
 With the following content (delimited by triple quotes """), answer the question at the end with only the information that comes from this content.
 If you are not sure and the answer is not in the content provided, answer with: ‘I don't know how I can help you.’
 Don't make up answers! Don't hallucinate!
