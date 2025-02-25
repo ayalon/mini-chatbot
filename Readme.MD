@@ -51,7 +51,9 @@ mv .env.example .env
 npx drizzle-kit migrate
 ```
 
-### Start implementing the 5 steps
+## Implement the chatbot
+
+### Follow the 5 steps
 
 Head over to the `src` folder and start implementing the 5 steps:
 
