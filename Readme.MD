@@ -1,4 +1,4 @@
-# Create your first chatbot
+# Workshop: Building a basic AI supported search / chatbot
 
 ## Introduction
 
