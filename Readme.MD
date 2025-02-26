@@ -2,7 +2,8 @@
 
 ## Introduction
 
-In this workshop, you will learn how to build the most basic AI supported search
+In this workshop in the Drupal Mountain Camp 2025 (https://drupalmountaincamp.ch/schedule-2025),
+you will learn how to build the most basic AI supported search
 / chatbot. We will crawl a bunch of pages and then build a small chatbot against
 its content.
 
