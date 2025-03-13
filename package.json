@@ -1,0 +1,44 @@
+{
+  "name": "mini-chatbot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "chat": "tsx src/05_chat_prompt.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@eslint/js": "^9.19.0",
+    "@types/node": "^22.13.1",
+    "@types/pg": "^8.11.11",
+    "@types/turndown": "^5.0.5",
+    "drizzle-kit": "^0.30.4",
+    "eslint": "^9.19.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.3",
+    "globals": "^15.14.0",
+    "prettier": "^3.4.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.23.0"
+  },
+  "dependencies": {
+    "@joplin/turndown-plugin-gfm": "^1.0.61",
+    "@langchain/textsplitters": "^0.1.0",
+    "cheerio": "^1.0.0",
+    "colorette": "^2.0.20",
+    "command-line-args": "^6.0.1",
+    "dotenv": "^16.4.7",
+    "drizzle-orm": "^0.39.1",
+    "gpt-tokenizer": "^2.8.1",
+    "inquirer": "^12.4.1",
+    "openai": "^4.82.0",
+    "pg": "^8.13.1",
+    "turndown": "^7.2.0"
+  }
+}

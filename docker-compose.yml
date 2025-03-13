@@ -1,0 +1,18 @@
+services:
+  db:
+    image: pgvector/pgvector:pg17
+    shm_size: '128mb'
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: mini_chatbot
+      ALLOW_IP_RANGE: 0.0.0.0/0
+    ports:
+      - 5432:5432
+    volumes:
+      - type: volume
+        source: postgreslib
+        target: /var/lib/postgresql/data
+volumes:
+  postgreslib:
+    name: mini-chatbot-pg
