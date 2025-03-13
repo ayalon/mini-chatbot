@@ -54,12 +54,12 @@ const main = async () => {
     console.log(yellow(`Found' ${similarContent.length} matching chunks`))
 
     // Display the URL and title of the relevant chunks
-    similarContent.forEach((c) => {
-      console.log(cyan(`Title: ${c.name}, URL: ${c.url}`))
+    similarContent.forEach((row) => {
+      console.log(cyan(`Title: ${row.chunks.title}, URL: ${row.crawl?.url}`))
     })
 
     // Join all the information into one string for the prompt
-    const content = similarContent.map((c) => c.content).join('"""\n"""\n')
+    const content = similarContent.map((row) => row.chunks.content).join('"""\n"""\n')
 
     // Send the prompt to the chat model
     const completion = await openAIclient.chat.completions.create({
